@@ -1,0 +1,4 @@
+imageai
+tensorflow==2.4.0
+jupyter
+opencv-python
