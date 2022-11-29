@@ -1,7 +1,6 @@
-from uuid import uuid4
+from typing import Dict, Tuple, Any
 
 import cv2
-from typing import Dict
 
 
 def vid_to_img(cap, folder: str):
@@ -30,7 +29,7 @@ def vid_to_img(cap, folder: str):
     return True, files
 
 
-def get_all_frames(cap) -> Dict:
+def get_all_frames(cap) -> Tuple[bool, Dict[int, Any]]:
     all_frames = dict()
 
     if not cap.isOpened():
@@ -46,4 +45,4 @@ def get_all_frames(cap) -> Dict:
 
         count += 1
 
-    return all_frames
+    return True, all_frames

@@ -4,7 +4,7 @@ import time
 import cv2
 from imageai.Detection import ObjectDetection
 
-from utils import vid_to_img
+from utils import get_all_frames
 
 DETECTOR = ObjectDetection()
 DETECTOR.setModelTypeAsYOLOv3()
@@ -14,24 +14,24 @@ DETECTOR.loadModel()
 CUSTOM = DETECTOR.CustomObjects(person=True)
 
 
-def detect_person(image, count: int):
+def detect_person(img_array, count: int):
     detections = DETECTOR.detectObjectsFromImage(
         custom_objects=CUSTOM,
-        input_image=image,
+        input_image=img_array,
         minimum_percentage_probability=30,
-        output_image_path=f"media/detected_images_from_video/frame__{count}.jpg"
+        input_type="array",
+        output_type="array"
     )
-
-    # cv2.imwrite(f"media/detected_images_from_video/frame::{count}.jpg", detections[0])
-    return detections
+    print(f"Processed frame: {count}")
+    return {count: detections[0]}
 
 
 if __name__ == "__main__":
     cap = cv2.VideoCapture("media/input_video/video_2.mp4")
 
-    success, files = vid_to_img(cap, folder="media/images_from_video")
-    # success = True
-    # files = [f"media/images_from_video/frame__{i}.jpg" for i in range(1, 245)]
+    success, all_frames = get_all_frames(cap)
+
+    print(f"Length of all frames: {len(all_frames)}")
 
     if success:
         start_time = time.time()
@@ -40,9 +40,39 @@ if __name__ == "__main__":
 
         result = pool.starmap(
             detect_person,
-            [(img, count) for count, img in enumerate(files)]
+            [(img, count) for count, img in all_frames.items()]
         )
 
         pool.close()
+
+        number_of_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+
+        print(f"Number of frames in videos: {number_of_frames}")
+
+        print(f"Length of result: {len(result)}")
+        # print(result[:2])
+
+        width, height = (
+            int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)),
+            int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        )
+        fps = int(cap.get(cv2.CAP_PROP_FPS))
+
+        # if len(result) == count - 1:
+        print("Creating video")
+        # Define the codec and create VideoWriter object
+        fourcc = cv2.VideoWriter_fourcc(*'avc1')
+        out = cv2.VideoWriter()
+        output_file_name = "media/output_video/parallel_detected_2_video_2.mp4"
+        out.open(output_file_name, fourcc, fps, (width, height), True)
+
+        all_images = [result[i].get(i+1) for i in range(len(result))]
+
+        _ = [out.write(image) for image in all_images]
+
+        out.release()
+
+        # Release resources
+        cap.release()
 
         print(f"Time taken: {time.time() - start_time}")

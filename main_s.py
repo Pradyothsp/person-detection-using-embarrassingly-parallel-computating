@@ -39,7 +39,7 @@ if __name__ == "__main__":
     print(f"FPS: {fps}")
 
     # Define the codec and create VideoWriter object
-    fourcc = cv2.VideoWriter_fourcc(*'avc1')  # TODO: change this, this is not working
+    fourcc = cv2.VideoWriter_fourcc(*'avc1')
     out = cv2.VideoWriter()
     output_file_name = "media/output_video/serial_detected_video_2.mp4"
     out.open(output_file_name, fourcc, fps, (width, height), True)
