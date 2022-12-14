@@ -27,6 +27,7 @@ def detect_person(img_array, count: int):
 
 
 if __name__ == "__main__":
+    # Reading video
     cap = cv2.VideoCapture("media/input_video/video_2.mp4")
 
     success, all_frames = get_all_frames(cap)
@@ -63,7 +64,7 @@ if __name__ == "__main__":
         # Define the codec and create VideoWriter object
         fourcc = cv2.VideoWriter_fourcc(*'avc1')
         out = cv2.VideoWriter()
-        output_file_name = "media/output_video/parallel_detected_2_video_2.mp4"
+        output_file_name = "media/output_video/parallel_detected_v2.mp4"
         out.open(output_file_name, fourcc, fps, (width, height), True)
 
         all_images = [result[i].get(i+1) for i in range(len(result))]

@@ -23,6 +23,7 @@ def detect_person(img_array):
 
 
 if __name__ == "__main__":
+    # Reading video
     cap = cv2.VideoCapture("media/input_video/video_2.mp4")
 
     if not cap.isOpened():
@@ -41,7 +42,7 @@ if __name__ == "__main__":
     # Define the codec and create VideoWriter object
     fourcc = cv2.VideoWriter_fourcc(*'avc1')
     out = cv2.VideoWriter()
-    output_file_name = "media/output_video/serial_detected_video_2.mp4"
+    output_file_name = "media/output_video/serial_detected.mp4"
     out.open(output_file_name, fourcc, fps, (width, height), True)
 
     ret, frame = cap.read()
