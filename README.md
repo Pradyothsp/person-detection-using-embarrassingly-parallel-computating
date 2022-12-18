@@ -73,7 +73,7 @@ Figure : Parallel Computing (v1)
 
 I am implementing this project on a MacBook Pro (2019) with 8 cores, which has an Intel i5 (8th generation) processor and 8 GB RAM. This laptop also has an SSD for reading and writing videos or images.
 
-# 2. Methodology
+# Steps
 
 The methodology for implementing person detection using embarrassingly parallel computing involves the following steps:
 
@@ -122,7 +122,7 @@ Figure : Original Frame Figure : Detected Frame
 
 The above figure 7 is the original image and figure 8 is the person detected image of YOLOv3.
 
-# 4. Conclusion
+# Conclusion
 
 In conclusion, person detection using embarrassingly parallel computing can be an effective way to accelerate the process of detecting people in images or video streams. By dividing the workload into many independent tasks that can be run simultaneously on multiple processors or computers, it is possible to significantly reduce the time required to perform person detection. However, the success of this approach will depend on the complexity of the person detection algorithm and the availability of sufficient computational resources. In general, using embarrassingly parallel computing can be a valuable tool for speeding up person detection in certain scenarios.
 
