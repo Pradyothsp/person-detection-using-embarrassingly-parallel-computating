@@ -1,10 +1,10 @@
-# Person Detection Using Embarrassingly Parallel Computing report
+# Person Detection Using Embarrassingly Parallel Computing
 
 This project aims to demonstrate the use of embarrassingly parallel computing techniques for detecting persons in video frames.
 
 # ****Project Overview****
 
-In this project, we will use the parallel processing capabilities of a multi-core processor or a GPU to speed up the process of detecting persons in video frames. We will be using a pre-trained deep learning model for object detection, specifically the **[YOLOv3](https://pjreddie.com/darknet/yolo/)** model.
+In this project, we will use the parallel processing capabilities of a multi-core processor to speed up the process of detecting persons in video frames. We will be using a pre-trained deep learning model for object detection, specifically the **[YOLOv3](https://pjreddie.com/darknet/yolo/)** model.
 
 We will compare the performance of the parallelized version of the person detection pipeline with a non-parallelized version to see the speedup achieved by using parallel processing.
 
